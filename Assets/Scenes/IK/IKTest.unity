@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &90661333 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1011955505495558464, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
+  m_PrefabInstance: {fileID: 8990395199900466787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &136898595
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +344,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f0902f457cd104ebc2fd9b2c847354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &259661298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4604508279705231871, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
+  m_PrefabInstance: {fileID: 8990395199900466787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &270590565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1027,11 @@ Transform:
   m_Father: {fileID: 915362667}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1182873513 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6315830057308208623, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
+  m_PrefabInstance: {fileID: 8990395199900466787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1200874604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,6 +1616,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f69391400d30b4a87c5e9003a06175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2069448947 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7165459621486160815, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
+  m_PrefabInstance: {fileID: 8990395199900466787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &537869623883825739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4224987806682830716, guid: fe3ca1af01e0b034fbaf8d5a475f004e, type: 3}
@@ -1665,6 +1685,10 @@ PrefabInstance:
     - target: {fileID: 8382841473334788624, guid: fe3ca1af01e0b034fbaf8d5a475f004e, type: 3}
       propertyPath: m_Name
       value: hotdogAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 8382841473334788624, guid: fe3ca1af01e0b034fbaf8d5a475f004e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9159764513815795882, guid: fe3ca1af01e0b034fbaf8d5a475f004e, type: 3}
       propertyPath: m_RootOrder
@@ -1793,7 +1817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8071898711655427874, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8885309251406787992, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
       propertyPath: m_RootOrder
@@ -1839,6 +1863,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8990395199570965930, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
+      propertyPath: m_Data.m_Root
+      value: 
+      objectReference: {fileID: 1182873513}
     - target: {fileID: 8990395199628462229, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
       propertyPath: speed
       value: 7
@@ -1867,6 +1895,10 @@ PrefabInstance:
       propertyPath: stepDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8990395200337579363, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
+      propertyPath: m_Data.m_Root
+      value: 
+      objectReference: {fileID: 90661333}
     - target: {fileID: 8990395200595451685, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
       propertyPath: speed
       value: 7
@@ -1895,6 +1927,14 @@ PrefabInstance:
       propertyPath: stepDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8990395200656519892, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
+      propertyPath: m_Data.m_Root
+      value: 
+      objectReference: {fileID: 259661298}
+    - target: {fileID: 8990395200972817522, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
+      propertyPath: m_Data.m_Root
+      value: 
+      objectReference: {fileID: 2069448947}
     - target: {fileID: 8990395201342943854, guid: 45fe02e5b3992084db0e969a6f30a038, type: 3}
       propertyPath: speed
       value: 7
