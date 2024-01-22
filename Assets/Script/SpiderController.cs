@@ -9,16 +9,13 @@ public class SpiderController : MonoBehaviour
     public float _trun_gain = 60f;
     public float smoothness = 5f;
     public Transform look_target;
-    
-    private Rigidbody _rigidbody;
+   
     private float defaultup;
     Vector3 movement;
-    private float lastRot;
+    private bool turn_mode = true;
 
-    // Start is called before the first frame update
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
         defaultup = transform.localPosition.y;
     }
 
@@ -26,47 +23,48 @@ public class SpiderController : MonoBehaviour
     void FixedUpdate()
     {
         fixedup();
-        
+        if (Input.GetKey(KeyCode.E))
+        {
+            turn_mode = !turn_mode;
+        }
+
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        move(h, v);
+        
+        if (turn_mode)
+        {
+            turn_move(h, v); 
+        }
+        else
+        {
+            move(h, v);
+        }
     }
 
     void move(float h, float v)
     {
-        if (v == 0 && h != 0)
+        movement.Set(h, 0f, v);
+        movement = movement.normalized * _speed * Time.deltaTime;
+        transform.Translate(movement);
+    }
+
+    void turn_move(float h, float v)
+    {
+        if (h != 0)
         {
-            look_target.localRotation *= Quaternion.Euler(transform.up * _speed * _trun_gain * Time.deltaTime * h);
+            look_target.Rotate(look_target.up * _speed * _trun_gain * Time.deltaTime * h);
+            transform.rotation = look_target.rotation;
         }
-        else
+
+        if (v != 0)
         {
-            movement.Set(h, 0f, v);
+            movement.Set(0f, 0f, v);
             movement = movement.normalized * _speed * Time.deltaTime;
             transform.Translate(movement);
         }
     }
 
-    private void LookAtSlowlY(Transform target, float speed = 1f)
-    {
-        if (target == null) return;
 
-        Vector3 dir = target.position - transform.position;
-        dir.z = 0f;
-
-        var nextRot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, nextRot, Time.deltaTime * speed);
-    }
-
-    private void RotateAround1(Transform target)
-    {
-        lastRot += _speed * Time.deltaTime;
-
-        Vector3 diff = transform.position - target.position;
-        diff.z = target.position.z;
-
-        Vector3 offset = Quaternion.AngleAxis(lastRot, transform.up) * diff;
-        target.position = transform.position + offset;
-    }
 
     void fixedup() {
         Ray ray = new Ray(transform.localPosition, -transform.up);

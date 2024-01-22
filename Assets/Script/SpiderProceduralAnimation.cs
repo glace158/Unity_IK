@@ -124,8 +124,8 @@ public class SpiderProceduralAnimation : MonoBehaviour
             transform.up = up;
             lastBodyUp = up;
 
-            transform.rotation = new Quaternion(transform.rotation.x, look_target.rotation.y, transform.rotation.z, transform.rotation.w); ;
-            transform.parent.rotation = transform.rotation;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look_target.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            //transform.parent.localRotation = transform.rotation;
         }
     }
 
