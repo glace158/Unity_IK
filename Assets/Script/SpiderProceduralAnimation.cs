@@ -117,15 +117,14 @@ public class SpiderProceduralAnimation : MonoBehaviour
         lastBodyPos = transform.position;
         if (nbLegs > 3 && bodyOrientation)
         {
-            Vector3 v1 = legTargets[0].position - legTargets[1].position;
-            Vector3 v2 = legTargets[2].position - legTargets[3].position;
+            Vector3 v1 = legTargets[0].localPosition - legTargets[1].localPosition;
+            Vector3 v2 = legTargets[2].localPosition - legTargets[3].localPosition;
             Vector3 normal = Vector3.Cross(v1, v2).normalized;
             Vector3 up = Vector3.Lerp(lastBodyUp, normal, 1f / (float)(smoothness + 1));
             transform.up = up;
             lastBodyUp = up;
 
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look_target.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-            //transform.parent.localRotation = transform.rotation;
         }
     }
 
