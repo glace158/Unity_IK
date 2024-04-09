@@ -1248,9 +1248,9 @@ MonoBehaviour:
   - {fileID: 242454426}
   - {fileID: 2039703767}
   - {fileID: 513133404}
-  stepSize: 0.15
+  stepSize: 0.2
   smoothness: 8
-  stepHeight: 0.15
+  stepHeight: 0.2
   bodyOrientation: 1
   look_target: {fileID: 1762565987}
 --- !u!4 &3233408431732841483 stripped

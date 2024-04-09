@@ -6,9 +6,9 @@ using static UnityEngine.GraphicsBuffer;
 public class SpiderProceduralAnimation : MonoBehaviour
 {
     public Transform[] legTargets;
-    public float stepSize = 1f;
-    public int smoothness = 1;
-    public float stepHeight = 0.1f;
+    public float stepSize = 0.15f;
+    public int smoothness = 8;
+    public float stepHeight = 0.15f;
     public bool bodyOrientation = true;
     public Transform look_target;
 
@@ -76,6 +76,46 @@ public class SpiderProceduralAnimation : MonoBehaviour
         legMoving[0] = false;
     }
 
+    void CrawlWalk(int indexToMove, Vector3[] desiredPositions)
+    {
+        for (int i = 0; i < nbLegs; ++i)
+            if (i != indexToMove)
+                legTargets[i].position = lastLegPositions[i];
+
+
+        if (indexToMove != -1 && !legMoving[0])//어느 다리가 움직여야하지만 legMoving이 false인 상태
+        {
+            Step(indexToMove, desiredPositions[indexToMove]);
+        }
+
+    }
+
+    void TrotWalk(int indexToMove, Vector3[] desiredPositions)
+    {
+        if(indexToMove != -1)
+        {
+            indexToMove = indexToMove <= 1 ? 0 : 2;
+        }
+        
+        for (int i = 0; i < nbLegs; ++i)
+            if (i != indexToMove && (i+1) != indexToMove || -1 == indexToMove)//움직이지 않은 다리 고정
+                legTargets[i].position = lastLegPositions[i];
+        
+        Debug.Log(indexToMove.ToString() + " " + legMoving[0].ToString() + " "+ legMoving[1].ToString() + " " + legMoving[2].ToString() + " " + legMoving[3].ToString());
+        if (indexToMove != -1 && !legMoving[0])//어느 다리가 움직여야하지만 legMoving이 false인 상태
+        {
+            Step(indexToMove, desiredPositions[indexToMove]);
+            Step(indexToMove+1, desiredPositions[indexToMove+1]);
+        }
+    }
+
+    void Step(int indexToMove , Vector3 desiredPosition)
+    {
+        Vector3 targetPoint = desiredPosition + Mathf.Clamp(velocity.magnitude * velocityMultiplier, 0.0f, 1.5f) * (desiredPosition - legTargets[indexToMove].position) + velocity * velocityMultiplier;
+        Vector3[] positionAndNormal = MatchToSurfaceFromAbove(targetPoint, raycastRange, transform.up);
+        legMoving[0] = true;
+        StartCoroutine(PerformStep(indexToMove, positionAndNormal[0]));
+    }
 
     void FixedUpdate()
     {
@@ -102,20 +142,14 @@ public class SpiderProceduralAnimation : MonoBehaviour
                 indexToMove = i;
             }
         }
-        for (int i = 0; i < nbLegs; ++i)
-            if (i != indexToMove)
-                legTargets[i].position = lastLegPositions[i];
 
-        if (indexToMove != -1 && !legMoving[0])
-        {
-            Vector3 targetPoint = desiredPositions[indexToMove] + Mathf.Clamp(velocity.magnitude * velocityMultiplier, 0.0f, 1.5f) * (desiredPositions[indexToMove] - legTargets[indexToMove].position) + velocity * velocityMultiplier;
-            Vector3[] positionAndNormal = MatchToSurfaceFromAbove(targetPoint, raycastRange, transform.up);
-            legMoving[0] = true;
-            StartCoroutine(PerformStep(indexToMove, positionAndNormal[0]));
-        }
+        //CrawlWalk(indexToMove, desiredPositions);
+        TrotWalk(indexToMove, desiredPositions);
 
+
+        //몸통 기울기 조정
         lastBodyPos = transform.position;
-        if (nbLegs > 3 && bodyOrientation)
+        if (nbLegs > 3 && bodyOrientation) 
         {
             Vector3 v1 = legTargets[0].localPosition - legTargets[1].localPosition;
             Vector3 v2 = legTargets[2].localPosition - legTargets[3].localPosition;
