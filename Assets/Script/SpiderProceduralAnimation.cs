@@ -143,8 +143,16 @@ public class SpiderProceduralAnimation : MonoBehaviour
             }
         }
 
-        //CrawlWalk(indexToMove, desiredPositions);
-        TrotWalk(indexToMove, desiredPositions);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            TrotWalk(indexToMove, desiredPositions);
+            stepSize = 0.4f;
+        }
+        else
+        {
+            stepSize = 0.2f;
+            CrawlWalk(indexToMove, desiredPositions);
+        }
 
 
         //몸통 기울기 조정

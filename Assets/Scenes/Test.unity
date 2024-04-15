@@ -283,7 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1ad199a1674794ca0c26c938e96545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.5
+  _walk_speed: 0.5
+  _run_speed: 0.7
   _trun_gain: 60
   smoothness: 5
   look_target: {fileID: 1762565987}

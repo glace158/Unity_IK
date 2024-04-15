@@ -5,7 +5,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class SpiderController : MonoBehaviour
 {
-    public float _speed = 1f;
+    public float _walk_speed = 0.5f;
+    public float _run_speed = 1f;
     public float _trun_gain = 60f;
     public float smoothness = 5f;
     public Transform look_target;
@@ -22,6 +23,8 @@ public class SpiderController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        float speed = 0;
+
         fixedup();
         if (Input.GetKey(KeyCode.E))
         {
@@ -30,36 +33,45 @@ public class SpiderController : MonoBehaviour
 
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        
-        if (turn_mode)
+
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            turn_move(h, v); 
+            speed = _run_speed;
         }
         else
         {
-            move(h, v);
+            speed = _walk_speed;
+        }
+
+        if (turn_mode)
+        {
+            turn_move(h, v, speed); 
+        }
+        else
+        {
+            move(h, v, speed);
         }
     }
 
-    void move(float h, float v)
+    void move(float h, float v, float speed)
     {
         movement.Set(h, 0f, v);
-        movement = movement.normalized * _speed * Time.deltaTime;
+        movement = movement.normalized * speed * Time.deltaTime;
         transform.Translate(movement);
     }
 
-    void turn_move(float h, float v)
+    void turn_move(float h, float v, float speed)
     {
         if (h != 0)
         {
-            look_target.Rotate(look_target.up * _speed * _trun_gain * Time.deltaTime * h);
+            look_target.Rotate(look_target.up * speed * _trun_gain * Time.deltaTime * h);
             transform.rotation = look_target.rotation;
         }
 
         if (v != 0)
         {
             movement.Set(0f, 0f, v);
-            movement = movement.normalized * _speed * Time.deltaTime;
+            movement = movement.normalized * speed * Time.deltaTime;
             transform.Translate(movement);
         }
     }
