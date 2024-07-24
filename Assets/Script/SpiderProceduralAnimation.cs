@@ -97,11 +97,12 @@ public class SpiderProceduralAnimation : MonoBehaviour
             indexToMove = indexToMove <= 1 ? 0 : 2;
         }
         
-        for (int i = 0; i < nbLegs; ++i)
+        for (int i = 0; i < nbLegs; ++i){
             if (i != indexToMove && (i+1) != indexToMove || -1 == indexToMove)//움직이지 않은 다리 고정
                 legTargets[i].position = lastLegPositions[i];
+        }
         
-        Debug.Log(indexToMove.ToString() + " " + legMoving[0].ToString() + " "+ legMoving[1].ToString() + " " + legMoving[2].ToString() + " " + legMoving[3].ToString());
+        
         if (indexToMove != -1 && !legMoving[0])//어느 다리가 움직여야하지만 legMoving이 false인 상태
         {
             Step(indexToMove, desiredPositions[indexToMove]);
